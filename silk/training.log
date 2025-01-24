@@ -1,0 +1,911 @@
+2025-01-24 06:10:32.782 | INFO     | silk.cli:_main:87 - run CLI in mode.command=training
+2025-01-24 06:10:32.783 | SUCCESS  | silk.cli:_main:91 - formatter `python` successfully instantiated
+2025-01-24 06:10:34.003 | ERROR    | silk.cli:main:111 - An error has been caught in function 'main', process 'MainProcess' (137), thread 'MainThread' (139841964523968):
+Traceback (most recent call last):
+
+  File "/usr/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+           │         │     └ {'__name__': '__main__', '__doc__': None, '__package__': 'silk.cli', '__loader__': <_frozen_importlib_external.SourceFileLoad...
+           │         └ <code object <module> at 0x7f2f7dce2e40, file "/root/silk/silk/cli/__main__.py", line 1>
+           └ <function _run_code at 0x7f2f7e7b6f80>
+  File "/usr/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+         │     └ {'__name__': '__main__', '__doc__': None, '__package__': 'silk.cli', '__loader__': <_frozen_importlib_external.SourceFileLoad...
+         └ <code object <module> at 0x7f2f7dce2e40, file "/root/silk/silk/cli/__main__.py", line 1>
+
+  File "/root/silk/silk/cli/__main__.py", line 24, in <module>
+    main()
+    └ <function main at 0x7f2f7d3e6440>
+
+  File "/usr/local/lib/python3.10/dist-packages/hydra/main.py", line 94, in decorated_main
+    _run_hydra(
+    └ <function _run_hydra at 0x7f2f7dd1dd80>
+  File "/usr/local/lib/python3.10/dist-packages/hydra/_internal/utils.py", line 394, in _run_hydra
+    _run_app(
+    └ <function _run_app at 0x7f2f7dd1de10>
+  File "/usr/local/lib/python3.10/dist-packages/hydra/_internal/utils.py", line 457, in _run_app
+    run_and_report(
+    └ <function run_and_report at 0x7f2f7dd1dcf0>
+  File "/usr/local/lib/python3.10/dist-packages/hydra/_internal/utils.py", line 220, in run_and_report
+    return func()
+           └ <function _run_app.<locals>.<lambda> at 0x7f2f7d242440>
+  File "/usr/local/lib/python3.10/dist-packages/hydra/_internal/utils.py", line 458, in <lambda>
+    lambda: hydra.run(
+            │     └ <function Hydra.run at 0x7f2f7dc6b2e0>
+            └ <hydra._internal.hydra.Hydra object at 0x7f2f7d46d990>
+  File "/usr/local/lib/python3.10/dist-packages/hydra/_internal/hydra.py", line 119, in run
+    ret = run_job(
+          └ <function run_job at 0x7f2f7dd1cee0>
+  File "/usr/local/lib/python3.10/dist-packages/hydra/core/utils.py", line 186, in run_job
+    ret.return_value = task_function(task_cfg)
+    │   │              │             └ {'formatter': {'_target_': 'silk.config.formatter.get_formatter', 'name': 'python'}, 'logger': {'handlers': {'stderr-dev': {'...
+    │   │              └ <function main at 0x7f2f7d3e63b0>
+    │   └ <property object at 0x7f2f7dd4b0b0>
+    └ JobReturn(overrides=['mode=train-silk'], cfg={'formatter': {'_target_': 'silk.config.formatter.get_formatter', 'name': 'pytho...
+
+  File "/root/silk/silk/cli/__main__.py", line 21, in main
+    silk.cli.main(cfg)
+    │    │   │    └ {'formatter': {'_target_': 'silk.config.formatter.get_formatter', 'name': 'python'}, 'logger': {'handlers': {'stderr-dev': {'...
+    │    │   └ <function main at 0x7f2f7d3e5750>
+    │    └ <module 'silk.cli' from '/root/silk/silk/cli/__init__.py'>
+    └ <module 'silk' from '/root/silk/silk/__init__.py'>
+
+> File "/root/silk/silk/cli/__init__.py", line 111, in main
+    return _main(cfg, working_dir)
+           │     │    └ '.'
+           │     └ {'formatter': {'_target_': 'silk.config.formatter.get_formatter', 'name': 'python'}, 'logger': {'handlers': {'stderr-dev': {'...
+           └ <function _main at 0x7f2f7d3e56c0>
+
+  File "/root/silk/silk/cli/__init__.py", line 94, in _main
+    output = _main_dispatch(cfg.mode.command, cfg)
+             │              │                 └ {'formatter': {'_target_': 'silk.config.formatter.get_formatter', 'name': 'python'}, 'logger': {'handlers': {'stderr-dev': {'...
+             │              └ {'formatter': {'_target_': 'silk.config.formatter.get_formatter', 'name': 'python'}, 'logger': {'handlers': {'stderr-dev': {'...
+             └ <function _main_dispatch at 0x7f2f7e621bd0>
+
+  File "/root/silk/silk/cli/__init__.py", line 67, in _main_dispatch
+    module = importlib.import_module(module_name)
+             │         │             └ 'silk.cli.training'
+             │         └ <function import_module at 0x7f2f7e7b7e20>
+             └ <module 'importlib' from '/usr/lib/python3.10/importlib/__init__.py'>
+
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           │          │           │    │        │        └ 0
+           │          │           │    │        └ None
+           │          │           │    └ 0
+           │          │           └ 'silk.cli.training'
+           │          └ <function _gcd_import at 0x7f2f7e8f3400>
+           └ <module '_frozen_importlib' (frozen)>
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+
+  File "/root/silk/silk/cli/training.py", line 7, in <module>
+    import pytorch_lightning as pl
+
+  File "/usr/local/lib/python3.10/dist-packages/pytorch_lightning/__init__.py", line 20, in <module>
+    from pytorch_lightning.callbacks import Callback  # noqa: E402
+  File "/usr/local/lib/python3.10/dist-packages/pytorch_lightning/callbacks/__init__.py", line 14, in <module>
+    from pytorch_lightning.callbacks.base import Callback
+  File "/usr/local/lib/python3.10/dist-packages/pytorch_lightning/callbacks/base.py", line 26, in <module>
+    from pytorch_lightning.utilities.types import STEP_OUTPUT
+  File "/usr/local/lib/python3.10/dist-packages/pytorch_lightning/utilities/types.py", line 25, in <module>
+    from torchmetrics import Metric
+  File "/usr/local/lib/python3.10/dist-packages/torchmetrics/__init__.py", line 31, in <module>
+    import scipy.signal
+  File "/usr/local/lib/python3.10/dist-packages/scipy/signal/__init__.py", line 320, in <module>
+    from ._bsplines import *
+  File "/usr/local/lib/python3.10/dist-packages/scipy/signal/_bsplines.py", line 7, in <module>
+    from ._signaltools import lfilter, sosfilt, lfiltic
+  File "/usr/local/lib/python3.10/dist-packages/scipy/signal/_signaltools.py", line 12, in <module>
+    from ._ltisys import dlti
+  File "/usr/local/lib/python3.10/dist-packages/scipy/signal/_ltisys.py", line 29, in <module>
+    from scipy.interpolate import make_interp_spline
+  File "/usr/local/lib/python3.10/dist-packages/scipy/interpolate/__init__.py", line 167, in <module>
+    from ._interpolate import *
+  File "/usr/local/lib/python3.10/dist-packages/scipy/interpolate/_interpolate.py", line 14, in <module>
+    from . import _fitpack_py
+  File "/usr/local/lib/python3.10/dist-packages/scipy/interpolate/_fitpack_py.py", line 8, in <module>
+    from ._fitpack_impl import bisplrep, bisplev, dblint  # noqa: F401
+  File "/usr/local/lib/python3.10/dist-packages/scipy/interpolate/_fitpack_impl.py", line 103, in <module>
+    'iwrk': array([], dfitpack_int), 'u': array([], float),
+            │         │                   └ <built-in function array>
+            │         └ <unprintable Int32DType object>
+            └ <built-in function array>
+
+TypeError
+2025-01-24 06:10:34.015 | ERROR    | silk.cli:main:113 - run failed, `*.log` file might be found in : .
+2025-01-24 06:14:22.150 | INFO     | silk.cli:_main:87 - run CLI in mode.command=training
+2025-01-24 06:14:22.151 | SUCCESS  | silk.cli:_main:91 - formatter `python` successfully instantiated
+2025-01-24 06:14:23.700 | ERROR    | silk.cli:main:111 - An error has been caught in function 'main', process 'MainProcess' (335), thread 'MainThread' (139751164531136):
+Traceback (most recent call last):
+
+  File "/usr/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+           │         │     └ {'__name__': '__main__', '__doc__': None, '__package__': 'silk.cli', '__loader__': <_frozen_importlib_external.SourceFileLoad...
+           │         └ <code object <module> at 0x7f1a59b6ee40, file "/root/silk/silk/cli/__main__.py", line 1>
+           └ <function _run_code at 0x7f1a5a616f80>
+  File "/usr/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+         │     └ {'__name__': '__main__', '__doc__': None, '__package__': 'silk.cli', '__loader__': <_frozen_importlib_external.SourceFileLoad...
+         └ <code object <module> at 0x7f1a59b6ee40, file "/root/silk/silk/cli/__main__.py", line 1>
+
+  File "/root/silk/silk/cli/__main__.py", line 24, in <module>
+    main()
+    └ <function main at 0x7f1a5922e440>
+
+  File "/usr/local/lib/python3.10/dist-packages/hydra/main.py", line 94, in decorated_main
+    _run_hydra(
+    └ <function _run_hydra at 0x7f1a59badd80>
+  File "/usr/local/lib/python3.10/dist-packages/hydra/_internal/utils.py", line 394, in _run_hydra
+    _run_app(
+    └ <function _run_app at 0x7f1a59bade10>
+  File "/usr/local/lib/python3.10/dist-packages/hydra/_internal/utils.py", line 457, in _run_app
+    run_and_report(
+    └ <function run_and_report at 0x7f1a59badcf0>
+  File "/usr/local/lib/python3.10/dist-packages/hydra/_internal/utils.py", line 220, in run_and_report
+    return func()
+           └ <function _run_app.<locals>.<lambda> at 0x7f1a5908a440>
+  File "/usr/local/lib/python3.10/dist-packages/hydra/_internal/utils.py", line 458, in <lambda>
+    lambda: hydra.run(
+            │     └ <function Hydra.run at 0x7f1a59af32e0>
+            └ <hydra._internal.hydra.Hydra object at 0x7f1a592b9900>
+  File "/usr/local/lib/python3.10/dist-packages/hydra/_internal/hydra.py", line 119, in run
+    ret = run_job(
+          └ <function run_job at 0x7f1a59bacee0>
+  File "/usr/local/lib/python3.10/dist-packages/hydra/core/utils.py", line 186, in run_job
+    ret.return_value = task_function(task_cfg)
+    │   │              │             └ {'formatter': {'_target_': 'silk.config.formatter.get_formatter', 'name': 'python'}, 'logger': {'handlers': {'stderr-dev': {'...
+    │   │              └ <function main at 0x7f1a5922e3b0>
+    │   └ <property object at 0x7f1a59bd70b0>
+    └ JobReturn(overrides=['mode=train-silk'], cfg={'formatter': {'_target_': 'silk.config.formatter.get_formatter', 'name': 'pytho...
+
+  File "/root/silk/silk/cli/__main__.py", line 21, in main
+    silk.cli.main(cfg)
+    │    │   │    └ {'formatter': {'_target_': 'silk.config.formatter.get_formatter', 'name': 'python'}, 'logger': {'handlers': {'stderr-dev': {'...
+    │    │   └ <function main at 0x7f1a5922d750>
+    │    └ <module 'silk.cli' from '/root/silk/silk/cli/__init__.py'>
+    └ <module 'silk' from '/root/silk/silk/__init__.py'>
+
+> File "/root/silk/silk/cli/__init__.py", line 111, in main
+    return _main(cfg, working_dir)
+           │     │    └ '.'
+           │     └ {'formatter': {'_target_': 'silk.config.formatter.get_formatter', 'name': 'python'}, 'logger': {'handlers': {'stderr-dev': {'...
+           └ <function _main at 0x7f1a5922d6c0>
+
+  File "/root/silk/silk/cli/__init__.py", line 94, in _main
+    output = _main_dispatch(cfg.mode.command, cfg)
+             │              │                 └ {'formatter': {'_target_': 'silk.config.formatter.get_formatter', 'name': 'python'}, 'logger': {'handlers': {'stderr-dev': {'...
+             │              └ {'formatter': {'_target_': 'silk.config.formatter.get_formatter', 'name': 'python'}, 'logger': {'handlers': {'stderr-dev': {'...
+             └ <function _main_dispatch at 0x7f1a5a47dbd0>
+
+  File "/root/silk/silk/cli/__init__.py", line 67, in _main_dispatch
+    module = importlib.import_module(module_name)
+             │         │             └ 'silk.cli.training'
+             │         └ <function import_module at 0x7f1a5a617e20>
+             └ <module 'importlib' from '/usr/lib/python3.10/importlib/__init__.py'>
+
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           │          │           │    │        │        └ 0
+           │          │           │    │        └ None
+           │          │           │    └ 0
+           │          │           └ 'silk.cli.training'
+           │          └ <function _gcd_import at 0x7f1a5a753400>
+           └ <module '_frozen_importlib' (frozen)>
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+
+  File "/root/silk/silk/cli/training.py", line 7, in <module>
+    import pytorch_lightning as pl
+
+  File "/usr/local/lib/python3.10/dist-packages/pytorch_lightning/__init__.py", line 27, in <module>
+    from pytorch_lightning.callbacks import Callback  # noqa: E402
+  File "/usr/local/lib/python3.10/dist-packages/pytorch_lightning/callbacks/__init__.py", line 14, in <module>
+    from pytorch_lightning.callbacks.batch_size_finder import BatchSizeFinder
+  File "/usr/local/lib/python3.10/dist-packages/pytorch_lightning/callbacks/batch_size_finder.py", line 26, in <module>
+    from pytorch_lightning.callbacks.callback import Callback
+  File "/usr/local/lib/python3.10/dist-packages/pytorch_lightning/callbacks/callback.py", line 22, in <module>
+    from pytorch_lightning.utilities.types import STEP_OUTPUT
+  File "/usr/local/lib/python3.10/dist-packages/pytorch_lightning/utilities/types.py", line 36, in <module>
+    from torchmetrics import Metric
+  File "/usr/local/lib/python3.10/dist-packages/torchmetrics/__init__.py", line 31, in <module>
+    import scipy.signal
+  File "/usr/local/lib/python3.10/dist-packages/scipy/signal/__init__.py", line 320, in <module>
+    from ._bsplines import *
+  File "/usr/local/lib/python3.10/dist-packages/scipy/signal/_bsplines.py", line 7, in <module>
+    from ._signaltools import lfilter, sosfilt, lfiltic
+  File "/usr/local/lib/python3.10/dist-packages/scipy/signal/_signaltools.py", line 12, in <module>
+    from ._ltisys import dlti
+  File "/usr/local/lib/python3.10/dist-packages/scipy/signal/_ltisys.py", line 29, in <module>
+    from scipy.interpolate import make_interp_spline
+  File "/usr/local/lib/python3.10/dist-packages/scipy/interpolate/__init__.py", line 167, in <module>
+    from ._interpolate import *
+  File "/usr/local/lib/python3.10/dist-packages/scipy/interpolate/_interpolate.py", line 14, in <module>
+    from . import _fitpack_py
+  File "/usr/local/lib/python3.10/dist-packages/scipy/interpolate/_fitpack_py.py", line 8, in <module>
+    from ._fitpack_impl import bisplrep, bisplev, dblint  # noqa: F401
+  File "/usr/local/lib/python3.10/dist-packages/scipy/interpolate/_fitpack_impl.py", line 103, in <module>
+    'iwrk': array([], dfitpack_int), 'u': array([], float),
+            │         │                   └ <built-in function array>
+            │         └ <unprintable Int32DType object>
+            └ <built-in function array>
+
+TypeError
+2025-01-24 06:14:23.714 | ERROR    | silk.cli:main:113 - run failed, `*.log` file might be found in : .
+2025-01-24 06:17:27.082 | INFO     | silk.cli:_main:87 - run CLI in mode.command=training
+2025-01-24 06:17:27.083 | SUCCESS  | silk.cli:_main:91 - formatter `python` successfully instantiated
+2025-01-24 06:17:28.634 | ERROR    | silk.cli:main:111 - An error has been caught in function 'main', process 'MainProcess' (531), thread 'MainThread' (139739106984384):
+Traceback (most recent call last):
+
+  File "/usr/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+           │         │     └ {'__name__': '__main__', '__doc__': None, '__package__': 'silk.cli', '__loader__': <_frozen_importlib_external.SourceFileLoad...
+           │         └ <code object <module> at 0x7f178b06ee40, file "/root/silk/silk/cli/__main__.py", line 1>
+           └ <function _run_code at 0x7f178bb1ef80>
+  File "/usr/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+         │     └ {'__name__': '__main__', '__doc__': None, '__package__': 'silk.cli', '__loader__': <_frozen_importlib_external.SourceFileLoad...
+         └ <code object <module> at 0x7f178b06ee40, file "/root/silk/silk/cli/__main__.py", line 1>
+
+  File "/root/silk/silk/cli/__main__.py", line 24, in <module>
+    main()
+    └ <function main at 0x7f178a72e440>
+
+  File "/usr/local/lib/python3.10/dist-packages/hydra/main.py", line 94, in decorated_main
+    _run_hydra(
+    └ <function _run_hydra at 0x7f178b0add80>
+  File "/usr/local/lib/python3.10/dist-packages/hydra/_internal/utils.py", line 394, in _run_hydra
+    _run_app(
+    └ <function _run_app at 0x7f178b0ade10>
+  File "/usr/local/lib/python3.10/dist-packages/hydra/_internal/utils.py", line 457, in _run_app
+    run_and_report(
+    └ <function run_and_report at 0x7f178b0adcf0>
+  File "/usr/local/lib/python3.10/dist-packages/hydra/_internal/utils.py", line 220, in run_and_report
+    return func()
+           └ <function _run_app.<locals>.<lambda> at 0x7f178a592440>
+  File "/usr/local/lib/python3.10/dist-packages/hydra/_internal/utils.py", line 458, in <lambda>
+    lambda: hydra.run(
+            │     └ <function Hydra.run at 0x7f178aff32e0>
+            └ <hydra._internal.hydra.Hydra object at 0x7f178a7b5990>
+  File "/usr/local/lib/python3.10/dist-packages/hydra/_internal/hydra.py", line 119, in run
+    ret = run_job(
+          └ <function run_job at 0x7f178b0acee0>
+  File "/usr/local/lib/python3.10/dist-packages/hydra/core/utils.py", line 186, in run_job
+    ret.return_value = task_function(task_cfg)
+    │   │              │             └ {'formatter': {'_target_': 'silk.config.formatter.get_formatter', 'name': 'python'}, 'logger': {'handlers': {'stderr-dev': {'...
+    │   │              └ <function main at 0x7f178a72e3b0>
+    │   └ <property object at 0x7f178b0d71a0>
+    └ JobReturn(overrides=['mode=train-silk'], cfg={'formatter': {'_target_': 'silk.config.formatter.get_formatter', 'name': 'pytho...
+
+  File "/root/silk/silk/cli/__main__.py", line 21, in main
+    silk.cli.main(cfg)
+    │    │   │    └ {'formatter': {'_target_': 'silk.config.formatter.get_formatter', 'name': 'python'}, 'logger': {'handlers': {'stderr-dev': {'...
+    │    │   └ <function main at 0x7f178a72d750>
+    │    └ <module 'silk.cli' from '/root/silk/silk/cli/__init__.py'>
+    └ <module 'silk' from '/root/silk/silk/__init__.py'>
+
+> File "/root/silk/silk/cli/__init__.py", line 111, in main
+    return _main(cfg, working_dir)
+           │     │    └ '.'
+           │     └ {'formatter': {'_target_': 'silk.config.formatter.get_formatter', 'name': 'python'}, 'logger': {'handlers': {'stderr-dev': {'...
+           └ <function _main at 0x7f178a72d6c0>
+
+  File "/root/silk/silk/cli/__init__.py", line 94, in _main
+    output = _main_dispatch(cfg.mode.command, cfg)
+             │              │                 └ {'formatter': {'_target_': 'silk.config.formatter.get_formatter', 'name': 'python'}, 'logger': {'handlers': {'stderr-dev': {'...
+             │              └ {'formatter': {'_target_': 'silk.config.formatter.get_formatter', 'name': 'python'}, 'logger': {'handlers': {'stderr-dev': {'...
+             └ <function _main_dispatch at 0x7f178b989bd0>
+
+  File "/root/silk/silk/cli/__init__.py", line 67, in _main_dispatch
+    module = importlib.import_module(module_name)
+             │         │             └ 'silk.cli.training'
+             │         └ <function import_module at 0x7f178bb1fe20>
+             └ <module 'importlib' from '/usr/lib/python3.10/importlib/__init__.py'>
+
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           │          │           │    │        │        └ 0
+           │          │           │    │        └ None
+           │          │           │    └ 0
+           │          │           └ 'silk.cli.training'
+           │          └ <function _gcd_import at 0x7f178bc5b400>
+           └ <module '_frozen_importlib' (frozen)>
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+
+  File "/root/silk/silk/cli/training.py", line 7, in <module>
+    import pytorch_lightning as pl
+
+  File "/usr/local/lib/python3.10/dist-packages/pytorch_lightning/__init__.py", line 27, in <module>
+    from pytorch_lightning.callbacks import Callback  # noqa: E402
+  File "/usr/local/lib/python3.10/dist-packages/pytorch_lightning/callbacks/__init__.py", line 14, in <module>
+    from pytorch_lightning.callbacks.batch_size_finder import BatchSizeFinder
+  File "/usr/local/lib/python3.10/dist-packages/pytorch_lightning/callbacks/batch_size_finder.py", line 26, in <module>
+    from pytorch_lightning.callbacks.callback import Callback
+  File "/usr/local/lib/python3.10/dist-packages/pytorch_lightning/callbacks/callback.py", line 22, in <module>
+    from pytorch_lightning.utilities.types import STEP_OUTPUT
+  File "/usr/local/lib/python3.10/dist-packages/pytorch_lightning/utilities/types.py", line 36, in <module>
+    from torchmetrics import Metric
+  File "/usr/local/lib/python3.10/dist-packages/torchmetrics/__init__.py", line 31, in <module>
+    import scipy.signal
+  File "/usr/local/lib/python3.10/dist-packages/scipy/signal/__init__.py", line 320, in <module>
+    from ._bsplines import *
+  File "/usr/local/lib/python3.10/dist-packages/scipy/signal/_bsplines.py", line 7, in <module>
+    from ._signaltools import lfilter, sosfilt, lfiltic
+  File "/usr/local/lib/python3.10/dist-packages/scipy/signal/_signaltools.py", line 12, in <module>
+    from ._ltisys import dlti
+  File "/usr/local/lib/python3.10/dist-packages/scipy/signal/_ltisys.py", line 29, in <module>
+    from scipy.interpolate import make_interp_spline
+  File "/usr/local/lib/python3.10/dist-packages/scipy/interpolate/__init__.py", line 167, in <module>
+    from ._interpolate import *
+  File "/usr/local/lib/python3.10/dist-packages/scipy/interpolate/_interpolate.py", line 14, in <module>
+    from . import _fitpack_py
+  File "/usr/local/lib/python3.10/dist-packages/scipy/interpolate/_fitpack_py.py", line 8, in <module>
+    from ._fitpack_impl import bisplrep, bisplev, dblint  # noqa: F401
+  File "/usr/local/lib/python3.10/dist-packages/scipy/interpolate/_fitpack_impl.py", line 103, in <module>
+    'iwrk': array([], dfitpack_int), 'u': array([], float),
+            │         │                   └ <built-in function array>
+            │         └ <unprintable Int32DType object>
+            └ <built-in function array>
+
+TypeError
+2025-01-24 06:17:28.646 | ERROR    | silk.cli:main:113 - run failed, `*.log` file might be found in : .
+2025-01-24 06:22:38.527 | INFO     | silk.cli:_main:87 - run CLI in mode.command=training
+2025-01-24 06:22:38.528 | SUCCESS  | silk.cli:_main:91 - formatter `python` successfully instantiated
+2025-01-24 06:22:39.633 | ERROR    | silk.cli:main:111 - An error has been caught in function 'main', process 'MainProcess' (981), thread 'MainThread' (140665911538112):
+Traceback (most recent call last):
+
+  File "/usr/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+           │         │     └ {'__name__': '__main__', '__doc__': None, '__package__': 'silk.cli', '__loader__': <_frozen_importlib_external.SourceFileLoad...
+           │         └ <code object <module> at 0x7fef54dcee40, file "/root/silk/silk/cli/__main__.py", line 1>
+           └ <function _run_code at 0x7fef558cef80>
+  File "/usr/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+         │     └ {'__name__': '__main__', '__doc__': None, '__package__': 'silk.cli', '__loader__': <_frozen_importlib_external.SourceFileLoad...
+         └ <code object <module> at 0x7fef54dcee40, file "/root/silk/silk/cli/__main__.py", line 1>
+
+  File "/root/silk/silk/cli/__main__.py", line 24, in <module>
+    main()
+    └ <function main at 0x7fef544d2440>
+
+  File "/usr/local/lib/python3.10/dist-packages/hydra/main.py", line 94, in decorated_main
+    _run_hydra(
+    └ <function _run_hydra at 0x7fef54e0dd80>
+  File "/usr/local/lib/python3.10/dist-packages/hydra/_internal/utils.py", line 394, in _run_hydra
+    _run_app(
+    └ <function _run_app at 0x7fef54e0de10>
+  File "/usr/local/lib/python3.10/dist-packages/hydra/_internal/utils.py", line 457, in _run_app
+    run_and_report(
+    └ <function run_and_report at 0x7fef54e0dcf0>
+  File "/usr/local/lib/python3.10/dist-packages/hydra/_internal/utils.py", line 220, in run_and_report
+    return func()
+           └ <function _run_app.<locals>.<lambda> at 0x7fef54342440>
+  File "/usr/local/lib/python3.10/dist-packages/hydra/_internal/utils.py", line 458, in <lambda>
+    lambda: hydra.run(
+            │     └ <function Hydra.run at 0x7fef54d572e0>
+            └ <hydra._internal.hydra.Hydra object at 0x7fef5455d900>
+  File "/usr/local/lib/python3.10/dist-packages/hydra/_internal/hydra.py", line 119, in run
+    ret = run_job(
+          └ <function run_job at 0x7fef54e0cee0>
+  File "/usr/local/lib/python3.10/dist-packages/hydra/core/utils.py", line 186, in run_job
+    ret.return_value = task_function(task_cfg)
+    │   │              │             └ {'formatter': {'_target_': 'silk.config.formatter.get_formatter', 'name': 'python'}, 'logger': {'handlers': {'stderr-dev': {'...
+    │   │              └ <function main at 0x7fef544d23b0>
+    │   └ <property object at 0x7fef557fa520>
+    └ JobReturn(overrides=['mode=train-silk'], cfg={'formatter': {'_target_': 'silk.config.formatter.get_formatter', 'name': 'pytho...
+
+  File "/root/silk/silk/cli/__main__.py", line 21, in main
+    silk.cli.main(cfg)
+    │    │   │    └ {'formatter': {'_target_': 'silk.config.formatter.get_formatter', 'name': 'python'}, 'logger': {'handlers': {'stderr-dev': {'...
+    │    │   └ <function main at 0x7fef544d1750>
+    │    └ <module 'silk.cli' from '/root/silk/silk/cli/__init__.py'>
+    └ <module 'silk' from '/root/silk/silk/__init__.py'>
+
+> File "/root/silk/silk/cli/__init__.py", line 111, in main
+    return _main(cfg, working_dir)
+           │     │    └ '.'
+           │     └ {'formatter': {'_target_': 'silk.config.formatter.get_formatter', 'name': 'python'}, 'logger': {'handlers': {'stderr-dev': {'...
+           └ <function _main at 0x7fef544d16c0>
+
+  File "/root/silk/silk/cli/__init__.py", line 94, in _main
+    output = _main_dispatch(cfg.mode.command, cfg)
+             │              │                 └ {'formatter': {'_target_': 'silk.config.formatter.get_formatter', 'name': 'python'}, 'logger': {'handlers': {'stderr-dev': {'...
+             │              └ {'formatter': {'_target_': 'silk.config.formatter.get_formatter', 'name': 'python'}, 'logger': {'handlers': {'stderr-dev': {'...
+             └ <function _main_dispatch at 0x7fef55739bd0>
+
+  File "/root/silk/silk/cli/__init__.py", line 67, in _main_dispatch
+    module = importlib.import_module(module_name)
+             │         │             └ 'silk.cli.training'
+             │         └ <function import_module at 0x7fef558cfe20>
+             └ <module 'importlib' from '/usr/lib/python3.10/importlib/__init__.py'>
+
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           │          │           │    │        │        └ 0
+           │          │           │    │        └ None
+           │          │           │    └ 0
+           │          │           └ 'silk.cli.training'
+           │          └ <function _gcd_import at 0x7fef55a0b400>
+           └ <module '_frozen_importlib' (frozen)>
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+
+  File "/root/silk/silk/cli/training.py", line 7, in <module>
+    import pytorch_lightning as pl
+
+  File "/usr/local/lib/python3.10/dist-packages/pytorch_lightning/__init__.py", line 20, in <module>
+    from pytorch_lightning.callbacks import Callback  # noqa: E402
+  File "/usr/local/lib/python3.10/dist-packages/pytorch_lightning/callbacks/__init__.py", line 14, in <module>
+    from pytorch_lightning.callbacks.base import Callback
+  File "/usr/local/lib/python3.10/dist-packages/pytorch_lightning/callbacks/base.py", line 26, in <module>
+    from pytorch_lightning.utilities.types import STEP_OUTPUT
+  File "/usr/local/lib/python3.10/dist-packages/pytorch_lightning/utilities/types.py", line 25, in <module>
+    from torchmetrics import Metric
+  File "/usr/local/lib/python3.10/dist-packages/torchmetrics/__init__.py", line 31, in <module>
+    import scipy.signal
+  File "/usr/local/lib/python3.10/dist-packages/scipy/signal/__init__.py", line 320, in <module>
+    from ._bsplines import *
+  File "/usr/local/lib/python3.10/dist-packages/scipy/signal/_bsplines.py", line 7, in <module>
+    from ._signaltools import lfilter, sosfilt, lfiltic
+  File "/usr/local/lib/python3.10/dist-packages/scipy/signal/_signaltools.py", line 12, in <module>
+    from ._ltisys import dlti
+  File "/usr/local/lib/python3.10/dist-packages/scipy/signal/_ltisys.py", line 29, in <module>
+    from scipy.interpolate import make_interp_spline
+  File "/usr/local/lib/python3.10/dist-packages/scipy/interpolate/__init__.py", line 167, in <module>
+    from ._interpolate import *
+  File "/usr/local/lib/python3.10/dist-packages/scipy/interpolate/_interpolate.py", line 14, in <module>
+    from . import _fitpack_py
+  File "/usr/local/lib/python3.10/dist-packages/scipy/interpolate/_fitpack_py.py", line 8, in <module>
+    from ._fitpack_impl import bisplrep, bisplev, dblint  # noqa: F401
+  File "/usr/local/lib/python3.10/dist-packages/scipy/interpolate/_fitpack_impl.py", line 103, in <module>
+    'iwrk': array([], dfitpack_int), 'u': array([], float),
+            │         │                   └ <built-in function array>
+            │         └ <unprintable Int32DType object>
+            └ <built-in function array>
+
+TypeError
+2025-01-24 06:22:39.644 | ERROR    | silk.cli:main:113 - run failed, `*.log` file might be found in : .
+2025-01-24 06:23:50.036 | INFO     | silk.cli:_main:87 - run CLI in mode.command=training
+2025-01-24 06:23:50.037 | SUCCESS  | silk.cli:_main:91 - formatter `python` successfully instantiated
+2025-01-24 06:23:51.055 | ERROR    | silk.cli:main:111 - An error has been caught in function 'main', process 'MainProcess' (1177), thread 'MainThread' (140125480178112):
+Traceback (most recent call last):
+
+  File "/usr/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+           │         │     └ {'__name__': '__main__', '__doc__': None, '__package__': 'silk.cli', '__loader__': <_frozen_importlib_external.SourceFileLoad...
+           │         └ <code object <module> at 0x7f7180adee40, file "/root/silk/silk/cli/__main__.py", line 1>
+           └ <function _run_code at 0x7f718154ef80>
+  File "/usr/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+         │     └ {'__name__': '__main__', '__doc__': None, '__package__': 'silk.cli', '__loader__': <_frozen_importlib_external.SourceFileLoad...
+         └ <code object <module> at 0x7f7180adee40, file "/root/silk/silk/cli/__main__.py", line 1>
+
+  File "/root/silk/silk/cli/__main__.py", line 24, in <module>
+    main()
+    └ <function main at 0x7f7180176440>
+
+  File "/usr/local/lib/python3.10/dist-packages/hydra/main.py", line 94, in decorated_main
+    _run_hydra(
+    └ <function _run_hydra at 0x7f7180b19d80>
+  File "/usr/local/lib/python3.10/dist-packages/hydra/_internal/utils.py", line 394, in _run_hydra
+    _run_app(
+    └ <function _run_app at 0x7f7180b19e10>
+  File "/usr/local/lib/python3.10/dist-packages/hydra/_internal/utils.py", line 457, in _run_app
+    run_and_report(
+    └ <function run_and_report at 0x7f7180b19cf0>
+  File "/usr/local/lib/python3.10/dist-packages/hydra/_internal/utils.py", line 220, in run_and_report
+    return func()
+           └ <function _run_app.<locals>.<lambda> at 0x7f717ffd2440>
+  File "/usr/local/lib/python3.10/dist-packages/hydra/_internal/utils.py", line 458, in <lambda>
+    lambda: hydra.run(
+            │     └ <function Hydra.run at 0x7f7180a672e0>
+            └ <hydra._internal.hydra.Hydra object at 0x7f71801fd960>
+  File "/usr/local/lib/python3.10/dist-packages/hydra/_internal/hydra.py", line 119, in run
+    ret = run_job(
+          └ <function run_job at 0x7f7180b18ee0>
+  File "/usr/local/lib/python3.10/dist-packages/hydra/core/utils.py", line 186, in run_job
+    ret.return_value = task_function(task_cfg)
+    │   │              │             └ {'formatter': {'_target_': 'silk.config.formatter.get_formatter', 'name': 'python'}, 'logger': {'handlers': {'stderr-dev': {'...
+    │   │              └ <function main at 0x7f71801763b0>
+    │   └ <property object at 0x7f7180b03c40>
+    └ JobReturn(overrides=['mode=train-silk'], cfg={'formatter': {'_target_': 'silk.config.formatter.get_formatter', 'name': 'pytho...
+
+  File "/root/silk/silk/cli/__main__.py", line 21, in main
+    silk.cli.main(cfg)
+    │    │   │    └ {'formatter': {'_target_': 'silk.config.formatter.get_formatter', 'name': 'python'}, 'logger': {'handlers': {'stderr-dev': {'...
+    │    │   └ <function main at 0x7f7180175750>
+    │    └ <module 'silk.cli' from '/root/silk/silk/cli/__init__.py'>
+    └ <module 'silk' from '/root/silk/silk/__init__.py'>
+
+> File "/root/silk/silk/cli/__init__.py", line 111, in main
+    return _main(cfg, working_dir)
+           │     │    └ '.'
+           │     └ {'formatter': {'_target_': 'silk.config.formatter.get_formatter', 'name': 'python'}, 'logger': {'handlers': {'stderr-dev': {'...
+           └ <function _main at 0x7f71801756c0>
+
+  File "/root/silk/silk/cli/__init__.py", line 94, in _main
+    output = _main_dispatch(cfg.mode.command, cfg)
+             │              │                 └ {'formatter': {'_target_': 'silk.config.formatter.get_formatter', 'name': 'python'}, 'logger': {'handlers': {'stderr-dev': {'...
+             │              └ {'formatter': {'_target_': 'silk.config.formatter.get_formatter', 'name': 'python'}, 'logger': {'handlers': {'stderr-dev': {'...
+             └ <function _main_dispatch at 0x7f71813b5bd0>
+
+  File "/root/silk/silk/cli/__init__.py", line 67, in _main_dispatch
+    module = importlib.import_module(module_name)
+             │         │             └ 'silk.cli.training'
+             │         └ <function import_module at 0x7f718154fe20>
+             └ <module 'importlib' from '/usr/lib/python3.10/importlib/__init__.py'>
+
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           │          │           │    │        │        └ 0
+           │          │           │    │        └ None
+           │          │           │    └ 0
+           │          │           └ 'silk.cli.training'
+           │          └ <function _gcd_import at 0x7f718168b400>
+           └ <module '_frozen_importlib' (frozen)>
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+
+  File "/root/silk/silk/cli/training.py", line 7, in <module>
+    import pytorch_lightning as pl
+
+  File "/usr/local/lib/python3.10/dist-packages/pytorch_lightning/__init__.py", line 20, in <module>
+    from pytorch_lightning.callbacks import Callback  # noqa: E402
+  File "/usr/local/lib/python3.10/dist-packages/pytorch_lightning/callbacks/__init__.py", line 14, in <module>
+    from pytorch_lightning.callbacks.base import Callback
+  File "/usr/local/lib/python3.10/dist-packages/pytorch_lightning/callbacks/base.py", line 26, in <module>
+    from pytorch_lightning.utilities.types import STEP_OUTPUT
+  File "/usr/local/lib/python3.10/dist-packages/pytorch_lightning/utilities/types.py", line 25, in <module>
+    from torchmetrics import Metric
+  File "/usr/local/lib/python3.10/dist-packages/torchmetrics/__init__.py", line 31, in <module>
+    import scipy.signal
+  File "/usr/local/lib/python3.10/dist-packages/scipy/signal/__init__.py", line 320, in <module>
+    from ._bsplines import *
+  File "/usr/local/lib/python3.10/dist-packages/scipy/signal/_bsplines.py", line 7, in <module>
+    from ._signaltools import lfilter, sosfilt, lfiltic
+  File "/usr/local/lib/python3.10/dist-packages/scipy/signal/_signaltools.py", line 12, in <module>
+    from ._ltisys import dlti
+  File "/usr/local/lib/python3.10/dist-packages/scipy/signal/_ltisys.py", line 29, in <module>
+    from scipy.interpolate import make_interp_spline
+  File "/usr/local/lib/python3.10/dist-packages/scipy/interpolate/__init__.py", line 167, in <module>
+    from ._interpolate import *
+  File "/usr/local/lib/python3.10/dist-packages/scipy/interpolate/_interpolate.py", line 14, in <module>
+    from . import _fitpack_py
+  File "/usr/local/lib/python3.10/dist-packages/scipy/interpolate/_fitpack_py.py", line 8, in <module>
+    from ._fitpack_impl import bisplrep, bisplev, dblint  # noqa: F401
+  File "/usr/local/lib/python3.10/dist-packages/scipy/interpolate/_fitpack_impl.py", line 103, in <module>
+    'iwrk': array([], dfitpack_int), 'u': array([], float),
+            │         │                   └ <built-in function array>
+            │         └ <unprintable Int32DType object>
+            └ <built-in function array>
+
+TypeError
+2025-01-24 06:23:51.072 | ERROR    | silk.cli:main:113 - run failed, `*.log` file might be found in : .
+2025-01-24 06:27:51.664 | INFO     | silk.cli:_main:87 - run CLI in mode.command=training
+2025-01-24 06:27:51.665 | SUCCESS  | silk.cli:_main:91 - formatter `python` successfully instantiated
+2025-01-24 06:27:52.658 | ERROR    | silk.cli:main:111 - An error has been caught in function 'main', process 'MainProcess' (1436), thread 'MainThread' (139988976361920):
+Traceback (most recent call last):
+
+  File "/usr/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+           │         │     └ {'__name__': '__main__', '__doc__': None, '__package__': 'silk.cli', '__loader__': <_frozen_importlib_external.SourceFileLoad...
+           │         └ <code object <module> at 0x7f51b8666e40, file "/root/silk/silk/cli/__main__.py", line 1>
+           └ <function _run_code at 0x7f51b9126f80>
+  File "/usr/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+         │     └ {'__name__': '__main__', '__doc__': None, '__package__': 'silk.cli', '__loader__': <_frozen_importlib_external.SourceFileLoad...
+         └ <code object <module> at 0x7f51b8666e40, file "/root/silk/silk/cli/__main__.py", line 1>
+
+  File "/root/silk/silk/cli/__main__.py", line 24, in <module>
+    main()
+    └ <function main at 0x7f51b7d26440>
+
+  File "/usr/local/lib/python3.10/dist-packages/hydra/main.py", line 94, in decorated_main
+    _run_hydra(
+    └ <function _run_hydra at 0x7f51b86a5d80>
+  File "/usr/local/lib/python3.10/dist-packages/hydra/_internal/utils.py", line 394, in _run_hydra
+    _run_app(
+    └ <function _run_app at 0x7f51b86a5e10>
+  File "/usr/local/lib/python3.10/dist-packages/hydra/_internal/utils.py", line 457, in _run_app
+    run_and_report(
+    └ <function run_and_report at 0x7f51b86a5cf0>
+  File "/usr/local/lib/python3.10/dist-packages/hydra/_internal/utils.py", line 220, in run_and_report
+    return func()
+           └ <function _run_app.<locals>.<lambda> at 0x7f51b7dde440>
+  File "/usr/local/lib/python3.10/dist-packages/hydra/_internal/utils.py", line 458, in <lambda>
+    lambda: hydra.run(
+            │     └ <function Hydra.run at 0x7f51b85eb2e0>
+            └ <hydra._internal.hydra.Hydra object at 0x7f51b7db1870>
+  File "/usr/local/lib/python3.10/dist-packages/hydra/_internal/hydra.py", line 119, in run
+    ret = run_job(
+          └ <function run_job at 0x7f51b86a4ee0>
+  File "/usr/local/lib/python3.10/dist-packages/hydra/core/utils.py", line 186, in run_job
+    ret.return_value = task_function(task_cfg)
+    │   │              │             └ {'formatter': {'_target_': 'silk.config.formatter.get_formatter', 'name': 'python'}, 'logger': {'handlers': {'stderr-dev': {'...
+    │   │              └ <function main at 0x7f51b7d263b0>
+    │   └ <property object at 0x7f51b868bdd0>
+    └ JobReturn(overrides=['mode=train-silk'], cfg={'formatter': {'_target_': 'silk.config.formatter.get_formatter', 'name': 'pytho...
+
+  File "/root/silk/silk/cli/__main__.py", line 21, in main
+    silk.cli.main(cfg)
+    │    │   │    └ {'formatter': {'_target_': 'silk.config.formatter.get_formatter', 'name': 'python'}, 'logger': {'handlers': {'stderr-dev': {'...
+    │    │   └ <function main at 0x7f51b7d25750>
+    │    └ <module 'silk.cli' from '/root/silk/silk/cli/__init__.py'>
+    └ <module 'silk' from '/root/silk/silk/__init__.py'>
+
+> File "/root/silk/silk/cli/__init__.py", line 111, in main
+    return _main(cfg, working_dir)
+           │     │    └ '.'
+           │     └ {'formatter': {'_target_': 'silk.config.formatter.get_formatter', 'name': 'python'}, 'logger': {'handlers': {'stderr-dev': {'...
+           └ <function _main at 0x7f51b7d256c0>
+
+  File "/root/silk/silk/cli/__init__.py", line 94, in _main
+    output = _main_dispatch(cfg.mode.command, cfg)
+             │              │                 └ {'formatter': {'_target_': 'silk.config.formatter.get_formatter', 'name': 'python'}, 'logger': {'handlers': {'stderr-dev': {'...
+             │              └ {'formatter': {'_target_': 'silk.config.formatter.get_formatter', 'name': 'python'}, 'logger': {'handlers': {'stderr-dev': {'...
+             └ <function _main_dispatch at 0x7f51b8f89bd0>
+
+  File "/root/silk/silk/cli/__init__.py", line 67, in _main_dispatch
+    module = importlib.import_module(module_name)
+             │         │             └ 'silk.cli.training'
+             │         └ <function import_module at 0x7f51b9127e20>
+             └ <module 'importlib' from '/usr/lib/python3.10/importlib/__init__.py'>
+
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           │          │           │    │        │        └ 0
+           │          │           │    │        └ None
+           │          │           │    └ 0
+           │          │           └ 'silk.cli.training'
+           │          └ <function _gcd_import at 0x7f51b925b400>
+           └ <module '_frozen_importlib' (frozen)>
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+
+  File "/root/silk/silk/cli/training.py", line 7, in <module>
+    import pytorch_lightning as pl
+
+  File "/usr/local/lib/python3.10/dist-packages/pytorch_lightning/__init__.py", line 20, in <module>
+    from pytorch_lightning.callbacks import Callback  # noqa: E402
+  File "/usr/local/lib/python3.10/dist-packages/pytorch_lightning/callbacks/__init__.py", line 14, in <module>
+    from pytorch_lightning.callbacks.base import Callback
+  File "/usr/local/lib/python3.10/dist-packages/pytorch_lightning/callbacks/base.py", line 26, in <module>
+    from pytorch_lightning.utilities.types import STEP_OUTPUT
+  File "/usr/local/lib/python3.10/dist-packages/pytorch_lightning/utilities/types.py", line 25, in <module>
+    from torchmetrics import Metric
+  File "/usr/local/lib/python3.10/dist-packages/torchmetrics/__init__.py", line 31, in <module>
+    import scipy.signal
+  File "/usr/local/lib/python3.10/dist-packages/scipy/signal/__init__.py", line 307, in <module>
+    from . import _sigtools, windows
+                  └ <module 'scipy.signal._sigtools' from '/usr/local/lib/python3.10/dist-packages/scipy/signal/_sigtools.cpython-310-x86_64-linu...
+  File "/usr/local/lib/python3.10/dist-packages/scipy/signal/windows/__init__.py", line 42, in <module>
+    from ._windows import *
+  File "/usr/local/lib/python3.10/dist-packages/scipy/signal/windows/_windows.py", line 7, in <module>
+    from scipy import linalg, special, fft as sp_fft
+  File "/usr/local/lib/python3.10/dist-packages/scipy/__init__.py", line 134, in __getattr__
+    return _importlib.import_module(f'scipy.{name}')
+           │          └ <function import_module at 0x7f51b9127e20>
+           └ <module 'importlib' from '/usr/lib/python3.10/importlib/__init__.py'>
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           │          │           │    │        │        └ 0
+           │          │           │    │        └ None
+           │          │           │    └ 0
+           │          │           └ 'scipy.linalg'
+           │          └ <function _gcd_import at 0x7f51b925b400>
+           └ <module '_frozen_importlib' (frozen)>
+  File "/usr/local/lib/python3.10/dist-packages/scipy/linalg/__init__.py", line 203, in <module>
+    from ._misc import *
+  File "/usr/local/lib/python3.10/dist-packages/scipy/linalg/_misc.py", line 3, in <module>
+    from .blas import get_blas_funcs
+  File "/usr/local/lib/python3.10/dist-packages/scipy/linalg/blas.py", line 213, in <module>
+    from scipy.linalg import _fblas
+
+ImportError: numpy._core.multiarray failed to import
+2025-01-24 06:27:52.701 | ERROR    | silk.cli:main:113 - run failed, `*.log` file might be found in : .
+2025-01-24 06:29:19.715 | INFO     | silk.cli:_main:87 - run CLI in mode.command=training
+2025-01-24 06:29:19.716 | SUCCESS  | silk.cli:_main:91 - formatter `python` successfully instantiated
+2025-01-24 06:29:23.446 | SUCCESS  | silk.cli:_main_dispatch:68 - module `silk.cli.training` successfully imported
+2025-01-24 06:29:24.715 | ERROR    | silk.cli:main:111 - An error has been caught in function 'main', process 'MainProcess' (1639), thread 'MainThread' (140630088053184):
+Traceback (most recent call last):
+
+  File "/usr/local/lib/python3.10/dist-packages/hydra/_internal/utils.py", line 644, in _locate
+    obj = getattr(obj, part)
+                  │    └ 'silk'
+                  └ <module 'silk.models' from '/root/silk/silk/models/__init__.py'>
+
+AttributeError: module 'silk.models' has no attribute 'silk'
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+  File "/usr/local/lib/python3.10/dist-packages/hydra/_internal/utils.py", line 650, in _locate
+    obj = import_module(mod)
+          │             └ 'silk.models.silk'
+          └ <function import_module at 0x7fe6fe4dfe20>
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           │          │           │    │        │        └ 0
+           │          │           │    │        └ None
+           │          │           │    └ 0
+           │          │           └ 'silk.models.silk'
+           │          └ <function _gcd_import at 0x7fe6fe61b400>
+           └ <module '_frozen_importlib' (frozen)>
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+
+  File "/root/silk/silk/models/silk.py", line 17, in <module>
+    from silk.losses.sfmlearner.sfm_loss import ones_like_loss, photometric_reconstruction_loss
+
+  File "/root/silk/silk/losses/sfmlearner/sfm_loss.py", line 7, in <module>
+    from silk.losses.info_nce.loss import positions_to_unidirectional_correspondence
+
+  File "/root/silk/silk/losses/info_nce/__init__.py", line 10, in <module>
+    import jax
+
+ModuleNotFoundError: No module named 'jax'
+
+
+The above exception was the direct cause of the following exception:
+
+
+Traceback (most recent call last):
+
+  File "/usr/local/lib/python3.10/dist-packages/hydra/_internal/instantiate/_instantiate2.py", line 134, in _resolve_target
+    target = _locate(target)
+             │       └ 'silk.models.silk.SiLKRandomHomographies'
+             └ <function _locate at 0x7fe6fda9a170>
+  File "/usr/local/lib/python3.10/dist-packages/hydra/_internal/utils.py", line 653, in _locate
+    raise ImportError(
+
+ImportError: Error loading 'silk.models.silk.SiLKRandomHomographies':
+ModuleNotFoundError("No module named 'jax'")
+Are you sure that 'silk' is importable from module 'silk.models'?
+
+
+The above exception was the direct cause of the following exception:
+
+
+Traceback (most recent call last):
+
+  File "/usr/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+           │         │     └ {'__name__': '__main__', '__doc__': None, '__package__': 'silk.cli', '__loader__': <_frozen_importlib_external.SourceFileLoad...
+           │         └ <code object <module> at 0x7fe6fda5ee40, file "/root/silk/silk/cli/__main__.py", line 1>
+           └ <function _run_code at 0x7fe6fe4def80>
+  File "/usr/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+         │     └ {'__name__': '__main__', '__doc__': None, '__package__': 'silk.cli', '__loader__': <_frozen_importlib_external.SourceFileLoad...
+         └ <code object <module> at 0x7fe6fda5ee40, file "/root/silk/silk/cli/__main__.py", line 1>
+
+  File "/root/silk/silk/cli/__main__.py", line 24, in <module>
+    main()
+    └ <function main at 0x7fe6fd0f2440>
+
+  File "/usr/local/lib/python3.10/dist-packages/hydra/main.py", line 94, in decorated_main
+    _run_hydra(
+    └ <function _run_hydra at 0x7fe6fda99d80>
+  File "/usr/local/lib/python3.10/dist-packages/hydra/_internal/utils.py", line 394, in _run_hydra
+    _run_app(
+    └ <function _run_app at 0x7fe6fda99e10>
+  File "/usr/local/lib/python3.10/dist-packages/hydra/_internal/utils.py", line 457, in _run_app
+    run_and_report(
+    └ <function run_and_report at 0x7fe6fda99cf0>
+  File "/usr/local/lib/python3.10/dist-packages/hydra/_internal/utils.py", line 220, in run_and_report
+    return func()
+           └ <function _run_app.<locals>.<lambda> at 0x7fe6fd1aa440>
+  File "/usr/local/lib/python3.10/dist-packages/hydra/_internal/utils.py", line 458, in <lambda>
+    lambda: hydra.run(
+            │     └ <function Hydra.run at 0x7fe6fd9e32e0>
+            └ <hydra._internal.hydra.Hydra object at 0x7fe6fd17d930>
+  File "/usr/local/lib/python3.10/dist-packages/hydra/_internal/hydra.py", line 119, in run
+    ret = run_job(
+          └ <function run_job at 0x7fe6fda98ee0>
+  File "/usr/local/lib/python3.10/dist-packages/hydra/core/utils.py", line 186, in run_job
+    ret.return_value = task_function(task_cfg)
+    │   │              │             └ {'formatter': {'_target_': 'silk.config.formatter.get_formatter', 'name': 'python'}, 'logger': {'handlers': {'stderr-dev': {'...
+    │   │              └ <function main at 0x7fe6fd0f23b0>
+    │   └ <property object at 0x7fe6fdac7100>
+    └ JobReturn(overrides=['mode=train-silk'], cfg={'formatter': {'_target_': 'silk.config.formatter.get_formatter', 'name': 'pytho...
+
+  File "/root/silk/silk/cli/__main__.py", line 21, in main
+    silk.cli.main(cfg)
+    │    │   │    └ {'formatter': {'_target_': 'silk.config.formatter.get_formatter', 'name': 'python'}, 'logger': {'handlers': {'stderr-dev': {'...
+    │    │   └ <function main at 0x7fe6fd0f1750>
+    │    └ <module 'silk.cli' from '/root/silk/silk/cli/__init__.py'>
+    └ <module 'silk' from '/root/silk/silk/__init__.py'>
+
+> File "/root/silk/silk/cli/__init__.py", line 111, in main
+    return _main(cfg, working_dir)
+           │     │    └ '.'
+           │     └ {'formatter': {'_target_': 'silk.config.formatter.get_formatter', 'name': 'python'}, 'logger': {'handlers': {'stderr-dev': {'...
+           └ <function _main at 0x7fe6fd0f16c0>
+
+  File "/root/silk/silk/cli/__init__.py", line 94, in _main
+    output = _main_dispatch(cfg.mode.command, cfg)
+             │              │                 └ {'formatter': {'_target_': 'silk.config.formatter.get_formatter', 'name': 'python'}, 'logger': {'handlers': {'stderr-dev': {'...
+             │              └ {'formatter': {'_target_': 'silk.config.formatter.get_formatter', 'name': 'python'}, 'logger': {'handlers': {'stderr-dev': {'...
+             └ <function _main_dispatch at 0x7fe6fe349bd0>
+
+  File "/root/silk/silk/cli/__init__.py", line 69, in _main_dispatch
+    return module.main(cfg) #HERE GO SILK.CLI.TRAINING
+           │      │    └ {'formatter': {'_target_': 'silk.config.formatter.get_formatter', 'name': 'python'}, 'logger': {'handlers': {'stderr-dev': {'...
+           │      └ <function main at 0x7fe6fd1aaa70>
+           └ <module 'silk.cli.training' from '/root/silk/silk/cli/training.py'>
+
+  File "/root/silk/silk/cli/training.py", line 49, in main
+    model = instantiate_and_ensure_is_instance(config.mode.model, pl.LightningModule)
+            │                                  │                  │  └ <class 'pytorch_lightning.core.lightning.LightningModule'>
+            │                                  │                  └ <module 'pytorch_lightning' from '/usr/local/lib/python3.10/dist-packages/pytorch_lightning/__init__.py'>
+            │                                  └ {'formatter': {'_target_': 'silk.config.formatter.get_formatter', 'name': 'python'}, 'logger': {'handlers': {'stderr-dev': {'...
+            └ <function instantiate_and_ensure_is_instance at 0x7fe6fd0f1d80>
+
+  File "/root/silk/silk/config/core.py", line 164, in instantiate_and_ensure_is_instance
+    instance = instantiate(cfg)
+               │           └ {'optimizer_spec': {'_target_': 'silk.config.optimizer.Spec', 'optimizer_class': 'torch.optim.Adam', 'lr': 2e-05, 'betas': [0...
+               └ <function instantiate at 0x7fe6fd0f1e10>
+
+  File "/root/silk/silk/config/core.py", line 173, in instantiate
+    return hydra.utils.instantiate(cfg)
+           │     │     │           └ {'optimizer_spec': {'_target_': 'silk.config.optimizer.Spec', 'optimizer_class': 'torch.optim.Adam', 'lr': 2e-05, 'betas': [0...
+           │     │     └ <function instantiate at 0x7fe6fda9a560>
+           │     └ <module 'hydra.utils' from '/usr/local/lib/python3.10/dist-packages/hydra/utils.py'>
+           └ <module 'hydra' from '/usr/local/lib/python3.10/dist-packages/hydra/__init__.py'>
+
+  File "/usr/local/lib/python3.10/dist-packages/hydra/_internal/instantiate/_instantiate2.py", line 226, in instantiate
+    return instantiate_node(
+           └ <function instantiate_node at 0x7fe6fda9a680>
+  File "/usr/local/lib/python3.10/dist-packages/hydra/_internal/instantiate/_instantiate2.py", line 333, in instantiate_node
+    _target_ = _resolve_target(node.get(_Keys.TARGET), full_key)
+               │               │    │   │     │        └ 'mode.model'
+               │               │    │   │     └ <_Keys.TARGET: '_target_'>
+               │               │    │   └ <enum '_Keys'>
+               │               │    └ <function DictConfig.get at 0x7fe6fdbd4f70>
+               │               └ {'optimizer_spec': {'_target_': 'silk.config.optimizer.Spec', 'optimizer_class': 'torch.optim.Adam', 'lr': 2e-05, 'betas': [0...
+               └ <function _resolve_target at 0x7fe6fda9a4d0>
+  File "/usr/local/lib/python3.10/dist-packages/hydra/_internal/instantiate/_instantiate2.py", line 139, in _resolve_target
+    raise InstantiationException(msg) from e
+          │                      └ "Error locating target 'silk.models.silk.SiLKRandomHomographies', set env var HYDRA_FULL_ERROR=1 to see chained exception.\nf...
+          └ <class 'hydra.errors.InstantiationException'>
+
+hydra.errors.InstantiationException: Error locating target 'silk.models.silk.SiLKRandomHomographies', set env var HYDRA_FULL_ERROR=1 to see chained exception.
+full_key: mode.model
+2025-01-24 06:29:24.727 | ERROR    | silk.cli:main:113 - run failed, `*.log` file might be found in : .
+2025-01-24 06:36:51.220 | INFO     | silk.cli:_main:87 - run CLI in mode.command=training
+2025-01-24 06:36:51.221 | SUCCESS  | silk.cli:_main:91 - formatter `python` successfully instantiated
+2025-01-24 06:36:54.735 | SUCCESS  | silk.cli:_main_dispatch:68 - module `silk.cli.training` successfully imported
+2025-01-24 06:37:53.860 | SUCCESS  | silk.cli:_main:95 - main dispatch successfully executed
+2025-01-24 06:37:53.871 | SUCCESS  | silk.cli:_main:99 - formatter successfully converted output
+2025-01-24 06:37:53.871 | SUCCESS  | silk.cli:_main:101 - ran successfully in working directory : .
