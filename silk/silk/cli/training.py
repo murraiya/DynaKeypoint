@@ -70,21 +70,28 @@ def main(config: DictConfig):
 
 
     # plt.figure(figsize=(20,5))
-    # for name, param in model.named_parameters():
-    #     if name.split('_')[0]=='model.model.kpt' or name.split('_')[0]=='model.model.desc':
-        
+    # for name, param in model.model.model.head.named_parameters():
+    #     # if name.split('_')[0]=='model.model.kpt' or name.split('_')[0]=='model.model.desc':
+    #     # if name.split('_')[0]=='model.model.kpt' and name.split('.')[-1]=='weight':
+    #     if name.split('.')[-1]=='weight':
+
+
     #         bins = torch.linspace(-1,1,30)
     #         # hist = [torch.histogram(c, bins = bins) for c in param.reshape(-1).detach().cpu()]
     #         hist = torch.histogram(param.detach().cpu(), bins = bins)
 
-    #         print(len(hist))
+    #         print(name, hist.hist)
+    #         print("=====================")
+    #         print(name, param.detach().cpu())
+
     #         plt.plot(hist.bin_edges[:-1], hist.hist, color=np.random.rand(3,), label="{}".format(name))
     #         plt.legend()
 
     #         pass
 
     #     else: param.requires_grad = False
-    # plt.savefig("./folder_for_viz/weights_xavier_50.png".format(name))
+    
+    # plt.savefig("./folder_for_viz/depthpro_wieghts.png".format(name))
 
     train_loader = instantiate_and_ensure_is_instance(
         config.mode.loaders.training, DataLoader

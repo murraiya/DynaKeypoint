@@ -1,6 +1,7 @@
 import numpy as np
 import torch
 import skimage.io as io
+import matplotlib.pyplot as plt
 import torch.nn.functional as F
 from silk.matching.mnn import mutual_nearest_neighbor
 from silk.cv.homography import HomographicSampler
@@ -213,15 +214,13 @@ def compute_diff(intrinsics, pose_inv, logits_0, logits_1, descs_0, descs_1, ima
     # print(sh)
     # 1,1,370,1226
     scale = sh[-1]*sh[-2]
-    diff_softmax = torch.softmax(diff.reshape(-1), dim=0).reshape(sh)
-    # io.imsave("./folder_for_viz/diff_softmax.png", (255*scale*diff_softmax[0]).permute(1,2,0).detach().cpu().numpy())
-    # exit(0)
-    # diff_softmax_h = torch.softmax(diff, dim=2)
-    # io.imsave("./folder_for_viz/diff_softmax_h.png", (255*diff_softmax_h[0]).permute(1,2,0).detach().cpu().numpy())
-    # diff_softmax_w = torch.softmax(diff, dim=3)
-    # io.imsave("./folder_for_viz/diff_softmax_w.png", (255*diff_softmax_w[0]).permute(1,2,0).detach().cpu().numpy())
-
-
+    diff_softmax = scale * torch.softmax(diff.reshape(-1), dim=0).reshape(sh)
+    # io.imsave("./folder_for_viz/diff_softmax.png", diff_softmax[0].permute(1,2,0).detach().cpu().numpy())
+    # [0.37892431020736694, 2.573427200317383]
+    
+    # io.imsave("./folder_for_viz/diff_softmax.png", (255*diff_softmax[0]).permute(1,2,0).detach().cpu().numpy())
+    # # [96.62580108642578, 656.2235717773438]
+    
 
     # print(diff.shape, max(diff.reshape(-1)))
     # torch.Size([1, 370, 1226]) tensor(734.9904, device='cuda:1')
@@ -270,6 +269,14 @@ def compute_diff(intrinsics, pose_inv, logits_0, logits_1, descs_0, descs_1, ima
 
 
 
+    # plt.figure(figsize=(20,5))
+
+
+    # bins = torch.linspace(-1,1,20)
+    # hist = torch.histogram(diff_softmax.detach().cpu(), bins = bins)
+
+    # plt.plot(hist.bin_edges[:-1], hist.hist, color=np.random.rand(3,))    
+    # plt.savefig("./folder_for_viz/softmax_hist.png")
 
     # print(score.shape)
     # torch.Size([1, 345, 1210])
@@ -277,25 +284,42 @@ def compute_diff(intrinsics, pose_inv, logits_0, logits_1, descs_0, descs_1, ima
     # print(descs_1.shape, logits_1.shape)
     # torch.Size([128, 370, 1226]) torch.Size([1, 370, 1226])
 
+    
     dummy_score = torch.full(descs_1[0].shape, fill_value=1, device=descs_1.device, dtype=torch.float32).unsqueeze(0)
     # print("dummyscore shape:", dummy_score.shape)
     # torch.Size([1, 370, 1226])
     dummy_score[:,kernel//2:-(kernel//2-1),kernel//2:-(kernel//2-1)] = score
-    # is this right?
-    # io.imsave("./folder_for_viz/pooled_32.png", (255*dummy_score[0]).detach().cpu().numpy())
-    # [2025-01-06 09:52:31,777][imageio][WARNING] - Lossy conversion from int64 to uint8. 
-    # Range [-1, 0]. Convert image to uint8 prior to saving to suppress this warning.
+    
+    # print(min(score.reshape(-1)))
+    # print(min(diff_softmax.reshape(-1)))
+    # # tensor(1.3644e-06, device='cuda:1')
+    # # tensor(8.3533e-07, device='cuda:1')
+    
 
+    plt.figure(figsize=(20,5))
+
+
+    bins = torch.linspace(-1,1,20)
+    hist = torch.histogram(dummy_score.reshape(-1).detach().cpu(), bins = bins)
+
+    plt.plot(hist.bin_edges[:-1], hist.hist, color=np.random.rand(3,))    
+    plt.savefig("./folder_for_viz/softmax_pooled_8_hist.png")
+    # is this right?
+    io.imsave("./folder_for_viz/softmax_pooled_8.png", (255*dummy_score[0]).detach().cpu().numpy())
+    # [0.0003479103615973145, 255.0].
+    # range[157.8199462890625, 423.5945129394531]
+
+    exit(0)
     photo_loss = abs(dummy_score*logits_1).mean()
 
 
-    avg = score.reshape(-1).mean()
+    # avg = score.reshape(-1).mean()
     # print(avg)
     # tensor(0.1947, device='cuda:1')
 
 
     ## i prefer small difference (dummy score) 
-    descs_1 = torch.where(dummy_score<avg, descs_1, 0)
+    descs_1 = torch.where(dummy_score<0.73, descs_1, 0)
     # a = torch.nonzero(dummy_score>avg)
     # print(descs_1[a[1]]) confirmed. it is all 0
     
