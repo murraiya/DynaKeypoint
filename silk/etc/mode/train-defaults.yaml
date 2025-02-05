@@ -3,14 +3,10 @@ defaults:
 
 command: "training"
 continue_from_checkpoint: null
+# continue_from_checkpoint: /root/silk/lightning_logs/silkimpl_250106/checkpoints/epoch=13-step=11703.ckpt
 # continue_from_checkpoint: /root/silk/lightning_logs/silkimpl_250103/checkpoints/epoch=6589-step=6589.ckpt
 # continue_from_checkpoint: /root/silk/lightning_logs/silkimpl_250102/checkpoints/epoch=17-step=17.ckpt
 # continue_from_checkpoint: /root/silk/lightning_logs/silkimpl_250101/checkpoints/epoch=345-step=345.ckpt
-# continue_from_checkpoint: /root/silk/lightning_logs/1204_1/checkpoints/epoch=9831-step=9831.ckpt
-# continue_from_checkpoint: /root/silk/lightning_logs/silkimpl_pose_5_C_3/checkpoints/epoch=89-step=89999.ckpt
-# continue_from_checkpoint: /root/silk/lightning_logs/sfm_depth_corr_v4_silkonly/checkpoints/epoch=3-step=3999.ckpt
-# continue_from_checkpoint: /root/silk/lightning_logs/formatted_kitti_odom_default_setting/checkpoints/epoch=95-step=95999.ckpt
-# continue_from_checkpoint: /root/silk/assets/models/silk/analysis/alpha/pvgg-4.ckpt
 # here for pretrained model maybe.
 model: ???
 trainer:

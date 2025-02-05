@@ -9,6 +9,7 @@ from typing import Any, Dict, Optional, Union
 
 import pytorch_lightning as pl
 import torch
+import matplotlib.pyplot as plt
 from silk.backbones.depthpro.SJNet import SJNet
 from silk.config.core import ensure_is_instance
 from silk.config.optimizer import Spec
@@ -81,15 +82,13 @@ class SiLKBase(
         for name, param in self.model.named_parameters():
             # if name in ['model.head.4.weight', 'model.head.4.bias'] or name.split('_')[0]=='model.kpt' or name.split('_')[0]=='model.desc':
             if name.split('_')[0]=='model.kpt' or name.split('_')[0]=='model.desc':
-                # print(param)
-                # torch.nn.init.constant_(param, 1)
+                
                 if name.split('.')[-1]=='weight':
                     torch.nn.init.xavier_normal_(param, gain=1.0)
-                # print(param)
-                # exit(0)
                 pass
-                
+
             else: param.requires_grad = False
+
         self._image_aug_transform = image_aug_transform
 
 # for m in self.modules():

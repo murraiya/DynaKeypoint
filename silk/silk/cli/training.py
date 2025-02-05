@@ -7,10 +7,14 @@
 import pytorch_lightning as pl
 from omegaconf import DictConfig, OmegaConf
 
+import matplotlib.pyplot as plt
+import torch
+import numpy as np
 from silk.config.core import instantiate_and_ensure_is_instance
 from silk.config.model import load_model_from_checkpoint
 from silk.logger import LOG
 from torch.utils.data import DataLoader
+
 
 
 def main(config: DictConfig):
@@ -46,6 +50,7 @@ def main(config: DictConfig):
 
     TODO(Pierre) : See TODO at end of function.
     """
+
     model = instantiate_and_ensure_is_instance(config.mode.model, pl.LightningModule)
     # here occurs silk.models.silk _init_loss_flow() 
 
@@ -53,40 +58,42 @@ def main(config: DictConfig):
         LOG.warning(
             f"the model's weight are being loaded from checkpoint : {config.mode.continue_from_checkpoint}\nplease make sure to disable it if that's not the intended behavior (by setting `config.mode.continue_from_checkpoint` to `null`)."
         )
+        
         load_model_from_checkpoint(
             model,
             checkpoint_path=config.mode.continue_from_checkpoint,
-            strict=True,
+            strict=False,
             freeze=False,
             eval=False,
         )
-    # print(config.mode.loaders.training)
+
+
+
+    # plt.figure(figsize=(20,5))
+    # for name, param in model.named_parameters():
+    #     if name.split('_')[0]=='model.model.kpt' or name.split('_')[0]=='model.model.desc':
+        
+    #         bins = torch.linspace(-1,1,30)
+    #         # hist = [torch.histogram(c, bins = bins) for c in param.reshape(-1).detach().cpu()]
+    #         hist = torch.histogram(param.detach().cpu(), bins = bins)
+
+    #         print(len(hist))
+    #         plt.plot(hist.bin_edges[:-1], hist.hist, color=np.random.rand(3,), label="{}".format(name))
+    #         plt.legend()
+
+    #         pass
+
+    #     else: param.requires_grad = False
+    # plt.savefig("./folder_for_viz/weights_xavier_50.png".format(name))
+
     train_loader = instantiate_and_ensure_is_instance(
         config.mode.loaders.training, DataLoader
     )
     val_loader = instantiate_and_ensure_is_instance(
         config.mode.loaders.validation, DataLoader
     )
-    print(len(train_loader)) #42728
-    print(len(val_loader)) #2114
-    print(type(train_loader))
-    # for batch in train_loader:
-    #     # img = batch
-    #     print(batch.size(), type(batch))
     
-    trainer = instantiate_and_ensure_is_instance(config.mode.trainer, pl.Trainer)
-    # trainer = pl.Trainer(
-    #     val_check_interval=0.25,
-    #     strategy= "ddp",
-    #     gpus = 1,
-    #     benchmark= True,
-    #     max_epochs= 100,
-    #     limit_val_batches= 100,
-    #     limit_train_batches= 1000
-    # )
-    # TEMPORARY(Pierre) : disabled because of missing transform and loss.
-    # print("!!!!!!!!!!!!!!!!!!!!", model)
-     
+    trainer = instantiate_and_ensure_is_instance(config.mode.trainer, pl.Trainer)     
     trainer.fit(model, train_loader, val_loader) #usually this becomes train
     
     # TEMPORARY(Pierre) : return some value for quick testing of pipeline

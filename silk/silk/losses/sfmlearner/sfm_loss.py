@@ -208,12 +208,14 @@ def compute_diff(intrinsics, pose_inv, logits_0, logits_1, descs_0, descs_1, ima
 
    
     diff = image_1*valid_points_1 - image_0_warped
-    # sh = diff.shape
+    sh = diff.shape
     
     # print(sh)
-    # diff_softmax = torch.softmax(diff.reshape(-1), dim=0).reshape(sh)
-    # io.imsave("./folder_for_viz/diff_softmax.png", (255*diff_softmax[0]).permute(1,2,0).detach().cpu().numpy())
-
+    # 1,1,370,1226
+    scale = sh[-1]*sh[-2]
+    diff_softmax = torch.softmax(diff.reshape(-1), dim=0).reshape(sh)
+    # io.imsave("./folder_for_viz/diff_softmax.png", (255*scale*diff_softmax[0]).permute(1,2,0).detach().cpu().numpy())
+    # exit(0)
     # diff_softmax_h = torch.softmax(diff, dim=2)
     # io.imsave("./folder_for_viz/diff_softmax_h.png", (255*diff_softmax_h[0]).permute(1,2,0).detach().cpu().numpy())
     # diff_softmax_w = torch.softmax(diff, dim=3)
@@ -250,7 +252,6 @@ def compute_diff(intrinsics, pose_inv, logits_0, logits_1, descs_0, descs_1, ima
     # print(normalized_diff.mean(), logits_1.mean())
     # tensor(0.4825, device='cuda:1') tensor(0.7624, device='cuda:1')
 
-    photo_loss = abs(diff*logits_1).mean()
     # io.imsave("./folder_for_viz/photo_loss.png", (255*normalized_diff*logits_1)[0].permute(1,2,0).detach().cpu().numpy())
 
     # print("-----------------------photo_loss------------------------")
@@ -260,13 +261,16 @@ def compute_diff(intrinsics, pose_inv, logits_0, logits_1, descs_0, descs_1, ima
 
     # normalized_diff = normalized_diff.clone()
     #-------------------------------------------------------------
-    kernel = 16
+    kernel = 8
     pool = torch.nn.AvgPool2d(kernel, stride=1, count_include_pad=False)
-    score = pool(diff)
+    score = pool(diff_softmax)
     # normalized diff is usually 0~1
     # print(min(score.reshape(-1)), max(score.reshape(-1)))
     # tensor(9.3497e-09, device='cuda:1') tensor(0.8500, device='cuda:1')
-    
+
+
+
+
     # print(score.shape)
     # torch.Size([1, 345, 1210])
         
@@ -276,19 +280,19 @@ def compute_diff(intrinsics, pose_inv, logits_0, logits_1, descs_0, descs_1, ima
     dummy_score = torch.full(descs_1[0].shape, fill_value=1, device=descs_1.device, dtype=torch.float32).unsqueeze(0)
     # print("dummyscore shape:", dummy_score.shape)
     # torch.Size([1, 370, 1226])
-
-    
     dummy_score[:,kernel//2:-(kernel//2-1),kernel//2:-(kernel//2-1)] = score
     # is this right?
     # io.imsave("./folder_for_viz/pooled_32.png", (255*dummy_score[0]).detach().cpu().numpy())
     # [2025-01-06 09:52:31,777][imageio][WARNING] - Lossy conversion from int64 to uint8. 
     # Range [-1, 0]. Convert image to uint8 prior to saving to suppress this warning.
 
+    photo_loss = abs(dummy_score*logits_1).mean()
 
 
     avg = score.reshape(-1).mean()
     # print(avg)
     # tensor(0.1947, device='cuda:1')
+
 
     ## i prefer small difference (dummy score) 
     descs_1 = torch.where(dummy_score<avg, descs_1, 0)

@@ -52,14 +52,14 @@ def load_model_from_checkpoint(  # noqa: C901
         state_dict = state_dict_fn(state_dict)
 
     model.load_state_dict(state_dict, strict=strict)
-    missing_keys, unexpected_keys = model.load_state_dict(state_dict, strict=strict)
-    if len(unexpected_keys) != 0:
-        print("Found unexpected keys from Depth Pro:", len(unexpected_keys))
-    # fc_norm is only for the classification head,
-    # which we would not use. We only use the encoding.
-    missing_keys = [key for key in missing_keys if "fc_norm" not in key]
-    if len(missing_keys) != 0:
-        print("Found missing keys from Depth Pro:", len(missing_keys))
+    # missing_keys, unexpected_keys = model.load_state_dict(state_dict, strict=strict)
+    # if len(unexpected_keys) != 0:
+    #     print("Found unexpected keys from Depth Pro:", len(unexpected_keys))
+    # # fc_norm is only for the classification head,
+    # # which we would not use. We only use the encoding.
+    # missing_keys = [key for key in missing_keys if "fc_norm" not in key]
+    # if len(missing_keys) != 0:
+    #     print("Found missing keys from Depth Pro:", len(missing_keys))
         
         
     if device is not None:
